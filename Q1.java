@@ -13,10 +13,12 @@ public class Q1 {
         // Calculate the shift key from digits in the phrase
         int digitSum = 0;
         for (int i = 0; i < phrase.length(); i++) {
+            // Loop through every character in the phrase to locate digits
             char ch = phrase.charAt(i);
             
-            // Check whether ch is digit or not
+            // Check if the character is a numeric digit ('0' to '9')
             if (Character.isDigit(ch)) {
+                // Convert the character digit to its integer value using ASCII subtraction
                 digitSum += ch - '0';
             }
         }
@@ -37,6 +39,7 @@ public class Q1 {
 
             // Rule 2: Shift lowercase letters forward by the key (circular)
             if (ch >= 'a' && ch <= 'z') {
+                // Normalize to 0-25 index, add key, wrap around with % 26, and convert back to char
                 char converted = (char) ('a' + (ch - 'a' + key) % 26);
                 encoded += converted;
             }
@@ -44,10 +47,10 @@ public class Q1 {
             // Rule 3: Process uppercase letters (vowels vs consonants)
             else if (ch >= 'A' && ch <= 'Z') {
                 if (ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U') {
-                    // Vowels become * followed by lowercase vowel
-                    encoded += "*" + (char) (ch + 32); // uppercase and lowercase letters are separated by 32 positions
+                    // Uppercase vowels become '*' followed by their lowercase version (+32 in ASCII)
+                    encoded += "*" + (char) (ch + 32);
                 } else {
-                    // Consonants become NEXT letter in lowercase (circular)
+                    // Uppercase consonants become the next letter circularly in lowercase
                     encoded += (char) ('a' + (ch - 'A' + 1) % 26);
                 }
             }
@@ -66,7 +69,7 @@ public class Q1 {
             
             // Rule 6: Move 2 places forward in circular sequence !@#$%
             else {
-                int index = symbol.indexOf(ch); // return -1 if not found character symbol
+                int index = symbol.indexOf(ch); // Returns -1 if ch is not in the symbol string
                 if (index != -1) {
                     int nextIndex = (index + 2) % symbol.length();
                     encoded += symbol.charAt(nextIndex);
