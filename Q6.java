@@ -2,7 +2,7 @@ package viva1;
 
 import java.util.Scanner;
 
-public class Q6 {
+public class Q6 { // WIX1002 Viva 1 Set B - Q6: Two Robots
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter robot commands: ");

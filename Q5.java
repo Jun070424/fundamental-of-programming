@@ -2,7 +2,7 @@ package viva1;
 
 import java.util.Scanner;
 
-public class Q5 {
+public class Q5 { // WIX1002 Viva 1 Set B - Q5: Rangoli Star Frame
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int X, Y, B;
