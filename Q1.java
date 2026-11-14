@@ -17,7 +17,7 @@ public class Q1 {
             char ch = phrase.charAt(i);
             
             // Check if the character is a numeric digit ('0' to '9')
-            if (Character.isDigit(ch)) {
+            if (ch >= '0' && ch <= '9') {
                 // Convert the character digit to its integer value using ASCII subtraction
                 digitSum += ch - '0';
             }
