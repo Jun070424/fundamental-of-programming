@@ -6,12 +6,12 @@ public class Q6 { // WIX1002 Viva 1 Set B - Q6: Two Robots
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter robot commands: ");
-        String cmd = sc.nextLine();
+        String command = sc.nextLine();
 
         // Step 0: the whole string is invalid if any character is not F/B/L/R (either case)
         boolean valid = true;
-        for (int i = 0; i < cmd.length(); i++) {
-            char c = cmd.charAt(i);
+        for (int i = 0; i < command.length(); i++) {
+            char c = command.charAt(i);
             if (c != 'F' && c != 'B' && c != 'L' && c != 'R'
                     && c != 'f' && c != 'b' && c != 'l' && c != 'r') {
                 valid = false;
@@ -32,57 +32,83 @@ public class Q6 { // WIX1002 Viva 1 Set B - Q6: Two Robots
             int meetings = 0, originReturns = 0, maxGap = 0;
 
             // kept[] works like a stack of the simplified commands; top = how many are kept
-            char[] kept = new char[cmd.length()];
+            char[] kept = new char[command.length()];
             int top = 0;
 
-            for (int i = 0; i < cmd.length(); i++) {
-                char c = cmd.charAt(i);
+            for (int i = 0; i < command.length(); i++) {
+                char c = command.charAt(i);
                 boolean isP = (c >= 'A' && c <= 'Z');
                 char u = c;                       // u = the uppercase letter, so P and Q share one set of checks
-                if (!isP) u = (char) (c - 32);    // 'f' - 32 = 'F' (ASCII)
+                if (!isP)
+                    u = (char) (c - 32);    // 'f' - 32 = 'F' (ASCII)
 
                 // ---- Simulate the move ----
                 int step = 0;   // +1 forward, -1 backward, 0 = it was a turn
                 if (u == 'F') {
                     step = 1;
-                } else if (u == 'B') {
-                    step = -1;
-                } else if (u == 'R') {
-                    if (isP) dP = (dP + 1) % 4; else dQ = (dQ + 1) % 4;
-                } else { // 'L': +3 is the same as -1 but never goes negative
-                    if (isP) dP = (dP + 3) % 4; else dQ = (dQ + 3) % 4;
                 }
+                else if (u == 'B') {
+                    step = -1;
+                } 
+                else if (u == 'R') {
+                    if (isP) 
+                        dP = (dP + 1) % 4; 
+                    else
+                        dQ = (dQ + 1) % 4; //endif
+                } 
+                else { // 'L': +3 is the same as -1 but never goes negative
+                    if (isP) 
+                        dP = (dP + 3) % 4;
+                    else 
+                        dQ = (dQ + 3) % 4; //endif
+                }//endif
 
                 if (step != 0) {
                     if (isP) {
                         xP += step * dx[dP];
                         yP += step * dy[dP];
-                        if (xP == 0 && yP == 0) originReturns++;
-                    } else {
+                        if (xP == 0 && yP == 0) 
+                            originReturns++; //endif
+                    } 
+                    else {
                         xQ += step * dx[dQ];
                         yQ += step * dy[dQ];
-                        if (xQ == 0 && yQ == 0) originReturns++;
-                    }
-                    if (xP == xQ && yP == yQ) meetings++;
+                        if (xQ == 0 && yQ == 0) 
+                            originReturns++; //endif
+                    }//endif
+                    if (xP == xQ && yP == yQ)
+                        meetings++; //endif
 
                     int gapX = xP - xQ;
-                    if (gapX < 0) gapX = -gapX;
+                    if (gapX < 0)
+                        gapX = -gapX; //endif
+                    
                     int gapY = yP - yQ;
-                    if (gapY < 0) gapY = -gapY;
-                    if (gapX + gapY > maxGap) maxGap = gapX + gapY;
-                }
+                    if (gapY < 0)
+                        gapY = -gapY; //endif
+                    if (gapX + gapY > maxGap)
+                        maxGap = gapX + gapY; //endif
+                }//endif
 
                 // ---- Build the simplified command list ----
                 char opposite;
-                if (u == 'F') opposite = 'B';
-                else if (u == 'B') opposite = 'F';
-                else if (u == 'L') opposite = 'R';
-                else opposite = 'L';
-                if (!isP) opposite = (char) (opposite + 32);   // Q's opposite is lowercase, so P and Q never cancel
+                if (u == 'F') 
+                    opposite = 'B';
+                else if 
+                    (u == 'B') opposite = 'F';
+                else if 
+                    (u == 'L') opposite = 'R';
+                else 
+                    opposite = 'L';
+                //endif
+                
+                if (!isP)
+                    opposite = (char) (opposite + 32);   // Q's opposite is lowercase, so P and Q never cancel
 
                 if (top > 0 && kept[top - 1] == opposite) {
                     top--;                                    // cancel rule: drop the last kept command
-                } else {
+                }
+                else {
                     kept[top] = c;
                     top++;
                     boolean isTurn = (u == 'L' || u == 'R');
