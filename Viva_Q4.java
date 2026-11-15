@@ -51,7 +51,7 @@ public class Viva_Q4 {
 
             System.out.println("0. Close hub");
 
-            System.out.print("\nSelect a vehicle (0-4): ");
+            System.out.print("Select a vehicle (0-4): ");
 
             // Validate integer input
 
