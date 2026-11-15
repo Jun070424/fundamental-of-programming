@@ -51,7 +51,7 @@ public class VIVA1Q3 {
                 && postcode.charAt(0)>='A' && postcode.charAt(0)<='Z'
                 && postcode.charAt(1)>='A' && postcode.charAt(1)<='Z'){
             String countryCode = postcode.substring(0,2);//taking the index 0 and index 1 letter
-            zone = "International(" + countryCode + ")";// International (XX)
+            zone = "International (" + countryCode + ")";// International (XX)
             international = true;
         }
         //
@@ -63,7 +63,7 @@ public class VIVA1Q3 {
                 validMalaysiaPostcode = area>=1 && area<=98;    
             }
             if(!validMalaysiaPostcode){
-                System.out.println("Error: Invalid postcode.Parcel skipped.\n");
+                System.out.println("Error: Invalid postcode. Parcel skipped.\n");
                 continue;
             }
             
@@ -83,7 +83,7 @@ public class VIVA1Q3 {
         boolean validWeight = false;
         
         while(!validWeight){
-            System.out.print("Enter parcels weight (g): ");
+            System.out.print("Enter parcel weight (g): ");
             String weightText = sc.nextLine();
             
             try{
@@ -97,7 +97,7 @@ public class VIVA1Q3 {
                 }
             }
             catch(NumberFormatException error){
-                System.out.println("Error: Weight must be a positive integer.");
+                System.out.println("Error: Weight must be an integer.");
             }
         }
         
@@ -108,7 +108,7 @@ public class VIVA1Q3 {
         boolean validDimension = false;
         
         while(!validDimension){
-            System.out.print("Enter dimension LxWxH (cm): ");
+            System.out.print("Enter dimensions LxWxH (cm): ");
             String dimension = sc.nextLine();
             
             String[]parts = dimension.split("[xX]",-1);
@@ -184,11 +184,11 @@ public class VIVA1Q3 {
         System.out.printf("Actual Weight: %.2f kg | Volumetric Weight: %.2f kg%n",actualKg,volumetricKg);
         System.out.println("Chargeable Weight: "+chargeableKg+" kg");
         System.out.println("Adjustment: "+adjustment);
-        System.out.printf("Shipping fee:RM %.2f%n\n",fee);
+        System.out.printf("Shipping Fee: RM %.2f%n\n",fee);
         
         }//endwhile
-        System.out.println("Parcel Processed: "+parcelProcess);
-        System.out.printf("Total shipping fees: RM %.2f%n",totalfees);
+        System.out.println("Parcels Processed: "+parcelProcess);
+        System.out.printf("Total Shipping Fees: RM %.2f%n",totalfees);
         System.out.println("Heaviest Chargeable Weight: "+heaviest+" kg");
     }
 }
