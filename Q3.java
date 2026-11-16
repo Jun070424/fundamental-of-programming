@@ -97,21 +97,25 @@ public class Q3 { // WIX1002 Viva 1 Set B - Q3: Smart Courier Shipping Fee
 
                 // An integer has only digits, with an optional '-' in front
                 boolean isInteger = (weightText.length() > 0);
+                boolean isNegative = false;
                 weightGrams = 0;
                 for (int i = 0; i < weightText.length(); i++) {
                     char character = weightText.charAt(i);
                     if (character >= '0' && character <= '9') {
                         weightGrams = weightGrams * 10 + (character - '0');   // build the number digit by digit
                     }
-                    else if (!(i == 0 && character == '-' && weightText.length() > 1)) {
-                        isInteger = false;
+                    else if (i == 0 && character == '-' && weightText.length() > 1) {
+                        isNegative = true;                                     // e.g. -500 is an integer, but not > 0
+                    }
+                    else {
+                        isInteger = false;                                     // a letter, a dot, a space, ...
                     }
                 }
 
                 if (!isInteger) {
                     System.out.println("Error: Weight must be an integer.");
                 }
-                else if (weightText.charAt(0) == '-' || weightGrams == 0) {
+                else if (isNegative || weightGrams == 0) {
                     System.out.println("Error: Weight must be greater than 0.");
                 }
                 else {
@@ -136,7 +140,10 @@ public class Q3 { // WIX1002 Viva 1 Set B - Q3: Smart Courier Shipping Fee
 
                 for (int i = 0; i < dimensions.length(); i++) {
                     char character = dimensions.charAt(i);
-                    if (character >= '0' && character <= '9') {
+                    if (character == ' ') {
+                        continue;                // ignore spaces, so "30 x 20 x 10" also works
+                    }
+                    else if (character >= '0' && character <= '9') {
                         currentNumber = currentNumber * 10 + (character - '0');
                         digitCount++;
                     }
