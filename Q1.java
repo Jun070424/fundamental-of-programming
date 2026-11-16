@@ -31,7 +31,6 @@ public class Q1 {
 
         // Define string encoded and symbol
         String encoded = "";
-        String symbol = "!@#$%";
 
         // Examine each character in the original phrase
         for (int i = 0; i < phrase.length(); i++) {
@@ -69,14 +68,25 @@ public class Q1 {
             
             // Rule 6: Move 2 places forward in circular sequence !@#$%
             else {
-                int index = symbol.indexOf(ch); // Returns -1 if ch is not in the symbol string
-                if (index != -1) {
-                    int nextIndex = (index + 2) % symbol.length();
-                    encoded += symbol.charAt(nextIndex);
-                }
-                // Leave any other character unchanged
-                else {
-                    encoded += ch;
+                // Move 2 places forward in ! @ # $ % (circular)
+                switch (ch) {
+                    case '!': 
+                        encoded += '#'; 
+                        break;
+                    case '@': 
+                        encoded += '$'; 
+                        break;
+                    case '#': 
+                        encoded += '%'; 
+                        break;
+                    case '$': 
+                        encoded += '!'; 
+                        break;
+                    case '%': 
+                        encoded += '@'; 
+                        break;
+                    default:  
+                        encoded += ch;   // any other character is left unchanged
                 }
             }
         }
