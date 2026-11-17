@@ -14,7 +14,7 @@ public class Viva_Q4 {
 
     public static void main(String[] args) {
 
-        int n, b, t, count = 0;
+        int n, b, t, count = 0;    //n=choice, b=battery current level, t=target
         int capacity = 0;
         int maxPower = 0;
 
